@@ -6,7 +6,7 @@
         $submenu=$_POST['txtsubmenu'];
         $submenukh=$_POST['txtsubmenukh'];
         $status=$_POST['txtstatus'];
-        $inorder=$_POST['txtinorder'];
+        $inorder=$_POST['txtInorder'];
         $sql="INSERT INTO `tbl_submenu` (`id`, `submenu`, `submenukh`, `status`, `inorder`, `menuid`) 
         VALUES (NULL, '$submenu', '$submenukh', '$status', '$inorder', '$menu')";
         $res=$con->query($sql);
@@ -16,9 +16,9 @@
         }
     }   
    
-    if(isset($_GET['action'])=="Delete"){
+    if(isset($_GET['actionName'])=="Delete"){
         $id=$_GET['id'];
-        $Del="DELETE FROM tbl_menu WHERE ID=$id";
+        $Del="DELETE FROM tbl_submenu WHERE ID=$id";
         $res=$con->query($Del);
         if($res){
             $_SESSION['msg']="Data have been deleted.";

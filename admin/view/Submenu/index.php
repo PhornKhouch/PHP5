@@ -34,7 +34,8 @@ session_start();
                 <tr>
                     <th>ID</th>
                     <th>Menu</th>
-                    <th>Menu KH</th>
+                    <th>SubMenu</th>
+                    <th>SubMenu KH</th>
                     <th>Inorder</th>
                     <th>Status</th>
                     <th>Action</th>
@@ -42,20 +43,26 @@ session_start();
             </thead>
             <tbody>
                 <?php
-                $SQL = "select * from tbl_menu";
+                $SQL = "SELECT 
+                            S.*,
+                            M.menu
+                        from 
+                        tbl_submenu  S
+                        INNER JOIN tbl_menu M ON S.menuid=M.ID";
                 $result = $con->query($SQL);
-                $i=1;
+                $i = 1;
                 while ($row = $result->fetch_assoc()) {
                 ?>
                     <tr>
-                        <td><?php echo $i++?></td>
-                        <td><?php echo $row['menu']?></td>
-                        <td><?php echo $row['menukh']?></td>
-                        <td><?php echo $row['inorder']?></td>
-                        <td><?php echo $row['status']?></td>
+                        <td><?php echo $i++ ?></td>
+                        <td><?php echo $row['menu'] ?></td>
+                        <td><?php echo $row['submenu'] ?></td>
+                        <td><?php echo $row['submenukh'] ?></td>
+                        <td><?php echo $row['inorder'] ?></td>
+                        <td><?php echo $row['status'] ?></td>
                         <td>
-                            <a href="../../model/Menu/actioncreate.php?id=<?php echo $row['ID']?>&&action=Delete" class="btn btn-secondary">Delete</a>
-                            <a href="edit.php?id=<?php echo $row['ID']?>" class="btn btn-success">Edit</a>
+                            <input type="button" id="myLink" data-id="<?php echo $row['id']?>" class="btn btn-success" value="Delete">
+                            <a href="edit.php?id=<?php echo $row['id']?>" class="btn btn-success">Edit</a>
                         </td>
                     </tr>
                 <?php
@@ -70,5 +77,28 @@ session_start();
 <?php
 include '../../root/DataTable.php';
 ?>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+   document.getElementById('myLink').addEventListener('click', function(event) {
+        // Prevent the default action of the link
+        event.preventDefault();
+
+        var id = event.currentTarget.getAttribute('data-id');
+        // Call SweetAlert
+        Swal.fire({
+            title: "Are you sure?",
+            text: "Do you want to delete this record ?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Ok"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '../../model/SubMenu/actioncreate.php?id=' + id + '&&actionName=Delete';
+            }
+        });
+    });
+</script>
 
 </html>
