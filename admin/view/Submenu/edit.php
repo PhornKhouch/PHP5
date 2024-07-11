@@ -28,17 +28,17 @@
 </head>
 <body>
     <div class="container-fludi mt-3" style="margin-left: 10px;">
-        <form action="../../model/SubMenu/actioncreate.php" method="post">
+        <form id="updateForm" action="../../model/SubMenu/actioncreate.php" method="post">
             <div class="row">
                 <div class="col-xl-12 bg-secondary p-2">
                     <a href="index.php" class="btn btn-success" style="margin-left: 15px;">Back</a>
-                    <input type="submit" name="btnUpdate" value="Update" class="btn btn-success">
+                    <input type="button" id="btnUpdate" name="btnUpdate" value="Update" class="btn btn-success">
                 </div>
             </div>
             <div class="row">
                 <div class="col-xl-4" style="display: none;">
                     <label for="">ID</label>
-                    <input type="text" name="txtsubmenuID" value="<?php echo $ID?>" class="form-control">
+                    <input type="text" name="txtsubmenuID" id="txtsubmenuID" value="<?php echo $ID?>" class="form-control">
                 </div>
                 <div class="col-xl-4 ">
                     <label for="">Menu</label>
@@ -57,7 +57,7 @@
                 </div>
                 <div class="col-xl-4 ">
                     <label for="">Submenu</label>
-                    <input type="text" name="txtsubmenu" value="<?php echo $submenu?>" class="form-control">
+                    <input type="text" name="txtsubmenu" id="txtsubmenu" value="<?php echo $submenu?>" class="form-control">
                 </div>
                 <div class="col-xl-4 ">
                     
@@ -85,4 +85,44 @@
         </form>
     </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+   document.getElementById('btnUpdate').addEventListener('click', function(event) {
+        // Prevent the default action of the link
+        event.preventDefault();
+
+        var txtsubmenu=document.getElementById('txtsubmenu');
+        var txtid=document.getElementById("txtsubmenuID");
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "Do you want to update this record ?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Ok"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                //window.location.href = '../../model/SubMenu/actionupdate.php?' + params.toString() + '&&actionName=Update';
+                $.ajax({
+                    url:'../../model/SubMenu/actionupdate.php',
+                    type:'post',
+                    data:{
+                        id:txtid.value,
+                        submenu:txtsubmenu.value,
+                        actionName:"Update",
+                    },
+                    success:function(res){
+                        window.location.href = 'index.php';
+                        
+                    }
+                })
+            }
+        });
+    });
+</script>
+<?php
+    include "../../root/DataTable.php";
+?>
 </html>

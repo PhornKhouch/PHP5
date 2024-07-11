@@ -32,17 +32,17 @@
                 <a href="#Order" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-cart-plus" style="margin-right: 10px;"></i>Product Management</a>
                 <ul class="collapse list-unstyled" id="Order" style="margin-left: 20px;">
                     <li>
-                        <a href="../view/NewsHomepage/index.php" target="content"><i class="fa fa-chevron-circle-right" aria-hidden="true" style="margin-right: 10px;"></i>Category</a>
+                        <a href="../view/Menu/index.php" target="content"><i class="fa fa-chevron-circle-right" aria-hidden="true" style="margin-right: 10px;"></i>Category</a>
                     </li>
                     <li>
-                        <a href="../view/NewsCategory/index.php" target="content"><i class="fa fa-chevron-circle-right" aria-hidden="true" style="margin-right: 10px;"></i>Brand</a>
+                        <a href="../view/Submenu/index.php" target="content"><i class="fa fa-chevron-circle-right" aria-hidden="true" style="margin-right: 10px;"></i>Brand</a>
                     </li>
                    
                     <li>
-                        <a href="../view/DetailNews/index.php" target="content"><i class="fa fa-chevron-circle-right" aria-hidden="true" style="margin-right: 10px;"></i>Feature Product</a>
+                        <a href="../view/FeaturedPrd/index.php" target="content"><i class="fa fa-chevron-circle-right" aria-hidden="true" style="margin-right: 10px;"></i>Feature Product</a>
                     </li>
                     <li>
-                        <a href="../view/NewsHomepage/index.php" target="content"><i class="fa fa-chevron-circle-right" aria-hidden="true" style="margin-right: 10px;"></i>Product Master</a>
+                        <a href="../view/MasterPrd/index.php" target="content"><i class="fa fa-chevron-circle-right" aria-hidden="true" style="margin-right: 10px;"></i>Product Master</a>
                     </li>
                     <li>
                         <a href="../view/NewsCategory/index.php" target="content"><i class="fa fa-chevron-circle-right" aria-hidden="true" style="margin-right: 10px;"></i>Product Detail</a>

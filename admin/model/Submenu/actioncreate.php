@@ -26,5 +26,11 @@
         }
     }
 
+    if(isset($_Get['actionName'])=="Update"){
+        $sql="UPDATE `tbl_submenu` SET `submenu` = 'apple 123', `submenukh` = 'KH123', `status` = 'I', `inorder` = '1', `menuid` = '13' 
+        WHERE `tbl_submenu`.`id` = 4;";
+        $res=$con->query($sql);
+    }
+
     header("location:../../view/SubMenu/index.php");
 ?>

@@ -33,36 +33,47 @@ session_start();
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Menu</th>
-                    <th>SubMenu</th>
-                    <th>SubMenu KH</th>
-                    <th>Inorder</th>
+                    <th>Category</th>
+                    <th>BrandName</th>
+                    <th>Description</th>
+                    <th>Postdate</th>
+                    <th>Price</th>
+                    <th>Discount</th>
                     <th>Status</th>
+                    <th>Inorder</th>
+                    <th>picture</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
                 $SQL = "SELECT 
-                            S.*,
-                            M.menu
-                        from 
-                        tbl_submenu  S
-                        INNER JOIN tbl_menu M ON S.menuid=M.ID";
+                            F.*,
+                            M.menu as categoryDes,
+                            S.submenu as brandDes
+                        FROM `tbl_prdfeature`  F 
+                        INNER join tbl_menu  M ON  F.cate=M.ID
+                        INNER join tbl_submenu S ON F.brand=S.id";
                 $result = $con->query($SQL);
                 $i = 1;
                 while ($row = $result->fetch_assoc()) {
                 ?>
                     <tr>
                         <td><?php echo $i++ ?></td>
-                        <td><?php echo $row['menu'] ?></td>
-                        <td><?php echo $row['submenu'] ?></td>
-                        <td><?php echo $row['submenukh'] ?></td>
+                        <td><?php echo $row['categoryDes'] ?></td>
+                        <td><?php echo $row['brandDes'] ?></td>
+                        <td><?php echo $row['des'] ?></td>
+                        <td><?php echo $row['postdate'] ?></td>
+                        <td><?php echo $row['price'] ?></td>
+                        <td><?php echo $row['discount'] ?></td>
                         <td><?php echo $row['inorder'] ?></td>
                         <td><?php echo $row['status'] ?></td>
                         <td>
-                            <input type="button"  data-id="<?php echo $row['id']?>" class="btn btn-success myLink" value="Delete">
-                            <a href="edit.php?id=<?php echo $row['id']?>" class="btn btn-success">Edit</a>
+                            <img alt='NULL' src="../../Upload//FeaturedPRD/<?php echo $row['image'] ?>" alt="" width="50px" height="60px">
+                        </td>
+                        <td>
+                            <a class="btn btn-success" href="../../model/FeaturedPrd/actioncreate.php?id='<?php echo $row['id']?>'&&actionName=Delete">Delete</a>
+                            <a href="edit.php?id=<?php echo $row['id'] ?>" class="btn btn-success">Edit</a>
                         </td>
                     </tr>
                 <?php
@@ -77,28 +88,5 @@ session_start();
 <?php
 include '../../root/DataTable.php';
 ?>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-   document.querySelector('.myLink').addEventListener('click', function(event) {
-        // Prevent the default action of the link
-        event.preventDefault();
-
-        var id = event.currentTarget.getAttribute('data-id');
-        // Call SweetAlert
-        Swal.fire({
-            title: "Are you sure?",
-            text: "Do you want to delete this record ?",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Ok"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = '../../model/SubMenu/actioncreate.php?id=' + id + '&&actionName=Delete';
-            }
-        });
-    });
-</script>
 
 </html>
